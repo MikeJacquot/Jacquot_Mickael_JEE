@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>com.humanbooster.Jacquot_Mickael_JEE.filters.AdminFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.humanbooster.Jacquot_Mickael_JEE.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminWelcomeServlet</servlet-name>
+        <servlet-class>com.humanbooster.Jacquot_Mickael_JEE.servlet.admin.AdminWelcomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>welcomeServlet</servlet-name>
+        <servlet-class>com.humanbooster.Jacquot_Mickael_JEE.servlet.WelcomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createUserServlet</servlet-name>
+        <servlet-class>com.humanbooster.Jacquot_Mickael_JEE.servlet.admin.CreateUserServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>10485760</max-file-size>
+            <max-request-size>20971520</max-request-size>
+            <file-size-threshold>5242880</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteUserServlet</servlet-name>
+        <servlet-class>com.humanbooster.Jacquot_Mickael_JEE.servlet.admin.DeleteUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>editUserServlet</servlet-name>
+        <servlet-class>com.humanbooster.Jacquot_Mickael_JEE.servlet.admin.EditUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>logoutServlet</servlet-name>
+        <servlet-class>com.humanbooster.Jacquot_Mickael_JEE.servlet.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>oupsServlet</servlet-name>
+        <servlet-class>com.humanbooster.Jacquot_Mickael_JEE.servlet.OupsServlet</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminWelcomeServlet</servlet-name>
+        <url-pattern>/adminwelcome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>welcomeServlet</servlet-name>
+        <url-pattern>/welcome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createUserServlet</servlet-name>
+        <url-pattern>/createuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteUserServlet</servlet-name>
+        <url-pattern>/deleteuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editUserServlet</servlet-name>
+        <url-pattern>/edituser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>oupsServlet</servlet-name>
+        <url-pattern>/oups</url-pattern>
+    </servlet-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errors/404.jsp</location>
+    </error-page>
+
+</web-app>
