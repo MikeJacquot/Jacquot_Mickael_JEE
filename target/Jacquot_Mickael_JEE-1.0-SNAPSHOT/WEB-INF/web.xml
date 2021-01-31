@@ -98,6 +98,9 @@
         <error-code>404</error-code>
         <location>/errors/404.jsp</location>
     </error-page>
-
+    <context-param>
+        <param-name>tempfile.dir</param-name>
+        <param-value>tmpfiles</param-value>
+    </context-param>
 
 </web-app>

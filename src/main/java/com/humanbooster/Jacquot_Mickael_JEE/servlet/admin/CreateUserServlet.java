@@ -4,10 +4,13 @@ import com.humanbooster.Jacquot_Mickael_JEE.model.User;
 import com.humanbooster.Jacquot_Mickael_JEE.service.UserService;
 
 import javax.servlet.*;
+
 import javax.servlet.http.*;
 
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import java.sql.SQLException;
@@ -35,29 +38,22 @@ public class CreateUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> errors = new ArrayList<>();
-        String nom = null;
-        String prenom;
-        String tel = null;
-        String login = null;
-        ;
-        String password = null;
-        Date date;
-        String role = null;
 
 
-        date = java.sql.Date.valueOf(request.getParameter("date"));
 
-        nom = request.getParameter("nom");
+        Date date = java.sql.Date.valueOf(request.getParameter("date"));
 
-        prenom = request.getParameter("prenom");
+        String nom = request.getParameter("nom");
 
-        tel = request.getParameter("tel");
+        String prenom = request.getParameter("prenom");
 
-        login = request.getParameter("login");
+        String tel = request.getParameter("tel");
 
-        password = request.getParameter("password");
+        String login = request.getParameter("login");
 
-        role = request.getParameter("role");
+        String password = request.getParameter("password");
+
+        String role = request.getParameter("role");
 
         String applicationPath = request.getServletContext().getRealPath("");
         // constructs path of the directory to save uploaded file
@@ -74,7 +70,7 @@ public class CreateUserServlet extends HttpServlet {
         String image = uniqueID + ".jpg";
 
 
-        // write all files in upload folder
+
         for (Part part : request.getParts()) {
             if (part != null && part.getSize() > 0) {
 

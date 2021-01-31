@@ -37,6 +37,8 @@
 </head>
 <body>
 <h1 style="text-align: center">Human-Booster</h1>
+
+
 <div class="login-form">
     <form  method="post">
         <h2 class="text-center">Log in</h2>

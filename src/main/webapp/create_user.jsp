@@ -11,7 +11,7 @@
 <form method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="image">Image à upload</label>
-        <input type="file" accept="image/*"
+        <input type="file" accept="image/jpg"
                class="form-control"
                id="image"
                name="image"
