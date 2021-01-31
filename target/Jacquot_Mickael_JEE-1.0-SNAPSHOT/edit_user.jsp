@@ -6,11 +6,11 @@
     <title>Edit user</title>
 </head>
 <body>
-
+<%@include file="parts/navbar.jsp"%>
 <h1>Editer Utilisateur</h1>
 
 <div class="container formcss">
-<%@include file="parts/navbar.jsp"%>
+
 <form method="post" enctype="multipart/form-data">
 
     <div class="form-group">

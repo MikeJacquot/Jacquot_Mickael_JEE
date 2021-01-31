@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -32,15 +34,30 @@ public class CreateUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String nom = request.getParameter("nom");
-        String prenom = request.getParameter("prenom");
-        Date date = java.sql.Date.valueOf(request.getParameter("date"));
-        String tel = request.getParameter("tel");
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        String role = request.getParameter("role");
+        List<String> errors = new ArrayList<>();
+        String nom = null;
+        String prenom;
+        String tel = null;
+        String login = null;
+        ;
+        String password = null;
+        Date date;
+        String role = null;
 
 
+        date = java.sql.Date.valueOf(request.getParameter("date"));
+
+        nom = request.getParameter("nom");
+
+        prenom = request.getParameter("prenom");
+
+        tel = request.getParameter("tel");
+
+        login = request.getParameter("login");
+
+        password = request.getParameter("password");
+
+        role = request.getParameter("role");
 
         String applicationPath = request.getServletContext().getRealPath("");
         // constructs path of the directory to save uploaded file
@@ -53,8 +70,8 @@ public class CreateUserServlet extends HttpServlet {
         }
 
         String uniqueID = UUID.randomUUID().toString();
-        String filePath = uploadFilePath + File.separator + uniqueID +".jpg";
-        String image = uniqueID +".jpg";
+        String filePath = uploadFilePath + File.separator + uniqueID + ".jpg";
+        String image = uniqueID + ".jpg";
 
 
         // write all files in upload folder
@@ -65,19 +82,28 @@ public class CreateUserServlet extends HttpServlet {
                 part.write(filePath);
             }
         }
-        try {
-            User newUser = new User(image, nom, prenom, date, tel, role, login, password);
-            int id = userService.create(newUser);
-            newUser.setId(id);
+        if (errors.size() > 0) {
+            request.setAttribute("errors", errors);
+            this.doGet(request, response);
+        } else {
+            try {
+                User newUser = new User(image, nom, prenom, date, tel, role, login, password);
+                int id = userService.create(newUser);
+                newUser.setId(id);
 
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+
+            response.sendRedirect(request.getContextPath() + "/admin/adminwelcome");
+
         }
-
-        response.sendRedirect(request.getContextPath()+"/admin/adminwelcome");
-
-        }
-
     }
+
+}
+
+
+
 
