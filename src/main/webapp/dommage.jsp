@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>oups</title>
+
 </head>
 <body>
 <h1>c'est admin / admin c'est pourtant simple non ?</h1>

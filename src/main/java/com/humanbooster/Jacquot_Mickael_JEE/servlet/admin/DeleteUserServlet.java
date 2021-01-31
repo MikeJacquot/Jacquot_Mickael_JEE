@@ -26,7 +26,7 @@ public class DeleteUserServlet extends HttpServlet {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        response.sendRedirect(request.getContextPath()+"/adminwelcome");
+        response.sendRedirect(request.getContextPath()+"/admin/adminwelcome");
     }
 
 

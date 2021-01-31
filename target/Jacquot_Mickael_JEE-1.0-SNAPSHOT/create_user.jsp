@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: HB
-  Date: 28/01/2021
-  Time: 10:55
-  To change this template use File | Settings | File Templates.
---%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,11 +7,11 @@
 </head>
 <body>
 <%@include file="parts/navbar.jsp"%>
-<div class="container">
+<div class="container formcss">
 <form method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="image">Image à upload</label>
-        <input type="file" accept="image/jpeg"
+        <input type="file" accept="image/*"
                class="form-control"
                id="image"
                name="image"

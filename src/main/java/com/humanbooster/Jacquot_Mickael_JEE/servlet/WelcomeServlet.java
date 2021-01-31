@@ -22,6 +22,7 @@ public class WelcomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<User> users =new ArrayList<User>();
+        if(request.getSession().getAttribute("username") != null){
 
         try {
             users = userservice.getAll();
@@ -30,8 +31,10 @@ public class WelcomeServlet extends HttpServlet {
         }
 
         request.setAttribute("users", users);
-        request.getRequestDispatcher("welcome.jsp").forward(request,response);
-
+        request.getRequestDispatcher("welcome.jsp").forward(request,response);}
+        else{
+            response.sendRedirect(request.getContextPath()+"/login");
+        }
     }
 
 

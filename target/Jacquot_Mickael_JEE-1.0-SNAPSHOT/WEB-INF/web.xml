@@ -17,11 +17,11 @@
         <servlet-class>com.humanbooster.Jacquot_Mickael_JEE.servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AdminWelcomeServlet</servlet-name>
+        <servlet-name>adminWelcomeServlet</servlet-name>
         <servlet-class>com.humanbooster.Jacquot_Mickael_JEE.servlet.admin.AdminWelcomeServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>welcomeServlet</servlet-name>
+        <servlet-name>WelcomeServlet</servlet-name>
         <servlet-class>com.humanbooster.Jacquot_Mickael_JEE.servlet.WelcomeServlet</servlet-class>
     </servlet>
     <servlet>
@@ -40,6 +40,11 @@
     <servlet>
         <servlet-name>editUserServlet</servlet-name>
         <servlet-class>com.humanbooster.Jacquot_Mickael_JEE.servlet.admin.EditUserServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>10485760</max-file-size>
+            <max-request-size>20971520</max-request-size>
+            <file-size-threshold>5242880</file-size-threshold>
+        </multipart-config>
     </servlet>
     <servlet>
         <servlet-name>logoutServlet</servlet-name>
@@ -49,31 +54,29 @@
         <servlet-name>oupsServlet</servlet-name>
         <servlet-class>com.humanbooster.Jacquot_Mickael_JEE.servlet.OupsServlet</servlet-class>
     </servlet>
-
-
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AdminWelcomeServlet</servlet-name>
-        <url-pattern>/adminwelcome</url-pattern>
+        <servlet-name>adminWelcomeServlet</servlet-name>
+        <url-pattern>/admin/adminwelcome</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>welcomeServlet</servlet-name>
+        <servlet-name>WelcomeServlet</servlet-name>
         <url-pattern>/welcome</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>createUserServlet</servlet-name>
-        <url-pattern>/createuser</url-pattern>
+        <url-pattern>/admin/createuser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>deleteUserServlet</servlet-name>
-        <url-pattern>/deleteuser</url-pattern>
+        <url-pattern>/admin/deleteuser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>editUserServlet</servlet-name>
-        <url-pattern>/edituser</url-pattern>
+        <url-pattern>/admin/edituser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>logoutServlet</servlet-name>
@@ -83,10 +86,18 @@
         <servlet-name>oupsServlet</servlet-name>
         <url-pattern>/oups</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.css</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.js</url-pattern>
+    </servlet-mapping>
     <error-page>
         <error-code>404</error-code>
         <location>/errors/404.jsp</location>
     </error-page>
+
 
 </web-app>

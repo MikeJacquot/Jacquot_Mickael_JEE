@@ -1,5 +1,6 @@
 package com.humanbooster.Jacquot_Mickael_JEE.servlet;
 
+import com.humanbooster.Jacquot_Mickael_JEE.model.User;
 import com.humanbooster.Jacquot_Mickael_JEE.service.UserService;
 
 import java.io.*;
@@ -9,17 +10,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 
-
 public class LoginServlet extends HttpServlet {
-    private boolean logged = false;
-    private boolean admin = false;
+    private final UserService us;
 
-
+    public LoginServlet() {
+        this.us = new UserService();
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
 
-        request.getRequestDispatcher("login.jsp").forward(request,response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
@@ -29,7 +30,7 @@ public class LoginServlet extends HttpServlet {
         String name = request.getParameter("username");
         String password = request.getParameter("password");
 
-        if(name.isEmpty()) {
+        if (name.isEmpty()) {
             errors.add("Le nom d'utilisateur ne peut pas etre vide");
 
         }
@@ -37,14 +38,12 @@ public class LoginServlet extends HttpServlet {
         try {
             if (us.getByLogin(name) == null) {
                 errors.add("utilisateur inconnu");
-                request.setAttribute("errors",errors);
+                request.setAttribute("errors", errors);
                 this.doGet(request, response);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-
 
 
         if (password.isEmpty()) {
@@ -53,28 +52,31 @@ public class LoginServlet extends HttpServlet {
         }
         if (us.checkUser(name, password)) {
             request.getSession().setAttribute("username", name);
-            this.logged = true;
-            request.getSession().setAttribute("logged",this.logged);
-            if(us.checkAdmin(name)){
-                this.admin = true;
-                request.getSession().setAttribute("admin",this.admin);
-            response.sendRedirect(request.getContextPath()+"/adminwelcome");
-            return;
-            }else{
-                this.admin = false;
-                response.sendRedirect(request.getContextPath()+"/welcome");
-                return;
-            }
 
-        }else{
+
+            try {
+                User userConnected = us.getByLogin(name);
+                if (userConnected.getRole().equals("admin")) {
+                    request.getSession().setAttribute("admin", userConnected.getRole());
+
+                    response.sendRedirect(request.getContextPath() + "/admin/adminwelcome");
+                    return;
+                } else {
+
+                    response.sendRedirect(request.getContextPath() + "/welcome");
+                    return;
+                }
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        } else {
             errors.add("mauvais mot de passe !");
         }
 
 
-
-        request.setAttribute("errors",errors);
+        request.setAttribute("errors", errors);
         this.doGet(request, response);
     }
-
 
 }

@@ -33,7 +33,7 @@ public class UserService implements DAO<User, Integer> {
             String imgLink = resultSet.getString("image_link");
             String lastName = resultSet.getString("lastname");
             String firstName = resultSet.getString("firstname");
-            Date date = resultSet.getDate("date_entree");
+            Date date = (resultSet.getDate("date_entree"));
             String tel = resultSet.getString("numero_tel");
             String role = resultSet.getString("role");
             String login = resultSet.getString("login");
@@ -45,30 +45,6 @@ public class UserService implements DAO<User, Integer> {
         prepareStatement.close();
         return users;
     }
-
-    public List<User> getAllForUsers() throws SQLException {
-        List<User> users = new ArrayList<User>();
-        String query = "SELECT id,image_link, lastname, firstname, date_entree, numero_tel, role FROM users;";
-        PreparedStatement prepareStatement = this.connection.prepareStatement(query);
-        ResultSet resultSet = prepareStatement.executeQuery();
-        while(resultSet.next()){
-            int idUser = resultSet.getInt("id");
-            String imgLink = resultSet.getString("image_link");
-            String lastName = resultSet.getString("lastname");
-            String firstName = resultSet.getString("firstname");
-            Date date = resultSet.getDate("date_entree");
-            String tel = resultSet.getString("numero_tel");
-            String role = resultSet.getString("role");
-
-            User nextUser = new User(idUser,imgLink,lastName,firstName,date,tel,role);
-            users.add(nextUser);
-        }
-        resultSet.close();
-        prepareStatement.close();
-        return users;
-    }
-
-
 
     @Override
     public User getById(Integer id) throws SQLException {
@@ -107,7 +83,7 @@ public class UserService implements DAO<User, Integer> {
         prepst.setString(1, user.getImage_link());
         prepst.setString(2, user.getLastName());
         prepst.setString(3, user.getFirstName());
-        prepst.setDate(4, user.getDate_entree());
+        prepst.setDate(4, new java.sql.Date(user.getDate_entree().getTime()));
         prepst.setString(5, user.getNumero_tel());
         prepst.setString(6, user.getRole());
         prepst.setString(7, user.getLogin());
@@ -135,7 +111,7 @@ public class UserService implements DAO<User, Integer> {
         prepst.setString(1, user.getImage_link());
         prepst.setString(2, user.getLastName());
         prepst.setString(3, user.getFirstName());
-        prepst.setDate(4, user.getDate_entree());
+        prepst.setDate(4, new java.sql.Date(user.getDate_entree().getTime()));
         prepst.setString(5, user.getNumero_tel());
         prepst.setString(6, user.getRole());
         prepst.setString(7, user.getLogin());
@@ -201,42 +177,24 @@ public class UserService implements DAO<User, Integer> {
         return false;
     }
 
-    public boolean checkAdmin(String login){
-        try {
-            if(getByLogin(login).getRole().equals("admin")){
-                return true;}
+    public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
+        return new java.sql.Date(date.getTime());
+    }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+    public java.util.Date convertSQLDateToJAVADate(
+            java.sql.Date sqlDate) {
+        java.util.Date javaDate = null;
+        if (sqlDate != null) {
+            javaDate = new Date(sqlDate.getTime());
         }
-        return false;
+        return javaDate;
     }
 
-    @Override
-    public Integer updatev2(User user) throws SQLException {
-        Integer numberOfLinesUpdated = null;
 
-        StringBuilder update = new StringBuilder();
-        update.append("UPDATE users SET login = ?, password = ?, firstname = ?, lastname = ?, image_link = ?, date_entree = ?, numero_tel = ?, role = ? WHERE id = ?;");
 
-        PreparedStatement preparedStatement = connection.prepareStatement(update.toString());
 
-        preparedStatement.setString(1, user.getLogin());
-        preparedStatement.setString(2, user.getPassword());
-        preparedStatement.setString(3, user.getFirstName());
-        preparedStatement.setString(4, user.getLastName());
-        preparedStatement.setString(5, user.getImage_link());
-        preparedStatement.setDate(6, user.getDate_entree());
-        preparedStatement.setString(7, user.getNumero_tel());
-        preparedStatement.setString(8, user.getRole());
-        preparedStatement.setInt(9, user.getId());
 
-        numberOfLinesUpdated = preparedStatement.executeUpdate();
 
-        preparedStatement.close();
-
-        return numberOfLinesUpdated;
-    }
 
 
 }

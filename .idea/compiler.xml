@@ -10,6 +10,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Businessnew" target="1.8" />
+      <module name="DAO" target="15" />
+      <module name="examBlanc" target="1.8" />
       <module name="Jacquot_Mickael_JEE" target="1.8" />
     </bytecodeTargetLevel>
   </component>

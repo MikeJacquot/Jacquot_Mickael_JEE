@@ -30,7 +30,7 @@ public class AdminWelcomeServlet extends HttpServlet {
         }
 
         request.setAttribute("users", users);
-        request.getRequestDispatcher("welcome_admin.jsp").forward(request,response);
+        request.getRequestDispatcher("/welcome_admin.jsp").forward(request,response);
 
     }
 

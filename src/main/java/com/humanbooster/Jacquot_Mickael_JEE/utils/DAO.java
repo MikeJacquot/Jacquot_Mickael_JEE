@@ -13,5 +13,4 @@ public interface DAO<T, ID> {
     Integer update(T t) throws SQLException;
     void delete(T t) throws SQLException;
 
-    Integer updatev2(User user) throws SQLException;
 }

@@ -1,7 +1,8 @@
 package com.humanbooster.Jacquot_Mickael_JEE.model;
 
-import java.sql.Date;
-import java.util.PrimitiveIterator;
+
+
+import java.util.Date;
 
 public class User {
 
@@ -66,9 +67,7 @@ public class User {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+
 
     public String getPassword() {
         return password;
@@ -90,47 +89,60 @@ public class User {
         return image_link;
     }
 
-    public void setImage_link(String image_link) {
-        this.image_link = image_link;
-    }
 
     public String getLastName() {
         return lastName;
+    }
+
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+
+
+    public Date getDate_entree() {
+        return this.date_entree;
+    }
+
+
+
+    public String getNumero_tel() {
+        return numero_tel;
+    }
+
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setImage_link(String image_link) {
+        this.image_link = image_link;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public Date getDate_entree() {
-        return date_entree;
     }
 
     public void setDate_entree(Date date_entree) {
         this.date_entree = date_entree;
     }
 
-    public String getNumero_tel() {
-        return numero_tel;
-    }
-
     public void setNumero_tel(String numero_tel) {
         this.numero_tel = numero_tel;
     }
 
-    public String getRole() {
-        return role;
-    }
-
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 }
