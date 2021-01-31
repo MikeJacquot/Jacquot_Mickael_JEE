@@ -43,7 +43,7 @@ public class CreateUserServlet extends HttpServlet {
 
 
         String applicationPath = request.getServletContext().getRealPath("");
-
+        // constructs path of the directory to save uploaded file
         String uploadFilePath = applicationPath + File.separator + "uploads";
 
 
@@ -53,10 +53,11 @@ public class CreateUserServlet extends HttpServlet {
         }
 
         String uniqueID = UUID.randomUUID().toString();
-        String filePath = uploadFilePath + uniqueID +".jpg";
-        String image = uniqueID + ".jpg";
+        String filePath = uploadFilePath + File.separator + uniqueID +".jpg";
+        String image = uniqueID +".jpg";
 
 
+        // write all files in upload folder
         for (Part part : request.getParts()) {
             if (part != null && part.getSize() > 0) {
 
